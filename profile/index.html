@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Igor Mironenko — Profile</title>
+  <style>
+    :root {
+      --bg: #F8F0FB;
+      --primary: #009FB7;
+      --accent: #DB995A;
+      --danger: #DB2B39;
+      --ink: #484D6D;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --border: rgba(72,77,109,0.12);
+      --shadow: 0 18px 45px rgba(72,77,109,0.10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #F8F0FB 0%, #fff 100%);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 28px;
+      align-items: stretch;
+      margin-top: 24px;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .photo-card {
+      padding: 24px;
+      text-align: center;
+      position: sticky;
+      top: 24px;
+      height: fit-content;
+    }
+
+    .photo {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 6px solid rgba(0,159,183,0.18);
+      box-shadow: 0 12px 30px rgba(0,159,183,0.18);
+      background: #eee;
+    }
+
+    .name {
+      font-size: 2.6rem;
+      line-height: 1.05;
+      margin: 0 0 10px;
+      color: var(--ink);
+    }
+
+    .tagline {
+      font-size: 1.08rem;
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 60ch;
+    }
+
+    .content-card { padding: 30px; }
+    .lang-switch {
+      display: inline-flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px;
+      background: rgba(0,159,183,0.08);
+      border-radius: 999px;
+      margin-bottom: 24px;
+    }
+
+    .lang-btn {
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      padding: 10px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 10px 20px rgba(0,159,183,0.20);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 26px;
+    }
+
+    .chip {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(219,153,90,0.12);
+      color: var(--ink);
+      font-size: 0.92rem;
+      font-weight: 600;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-weight: 700;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-secondary { background: white; color: var(--ink); border-color: var(--border); }
+    .btn-warm { background: var(--accent); color: white; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .panel {
+      padding: 22px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    .panel h2, .timeline h2 {
+      margin: 0 0 12px;
+      font-size: 1.1rem;
+      color: var(--danger);
+    }
+
+    .timeline {
+      margin-top: 22px;
+      padding: 24px;
+    }
+
+    .item {
+      padding: 18px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .item:first-of-type { border-top: 0; padding-top: 0; }
+    .role { font-size: 1.08rem; font-weight: 800; margin: 0; }
+    .meta { color: var(--muted); font-size: 0.95rem; margin: 4px 0 10px; }
+    .item ul { margin: 0; padding-left: 18px; }
+    .item li { margin: 6px 0; }
+
+    .lang-content { display: none; }
+    .lang-content.active { display: block; }
+
+    .foot {
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero { grid-template-columns: 1fr; }
+      .photo-card { position: static; }
+      .grid { grid-template-columns: 1fr; }
+      .name { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <aside class="card photo-card">
+        <img class="photo" src="../assets/photo.jpg" alt="Igor Mironenko" />
+        <h2 style="margin-bottom:8px; color:#484D6D;">Igor Mironenko</h2>
+        <p style="margin-top:0; color:#6b7280;">Engineering Manager · Staff Backend · Tech Lead</p>
+        <div class="chips" style="justify-content:center; margin-top:18px;">
+          <span class="chip">Ruby on Rails</span>
+          <span class="chip">Distributed Systems</span>
+          <span class="chip">Leadership</span>
+          <span class="chip">Remote Worldwide</span>
+        </div>
+        <div class="actions" style="justify-content:center;">
+          <a class="btn btn-primary" href="mailto:igormir87@gmail.com">Email</a>
+          <a class="btn btn-secondary" href="https://t.me/imgko">Telegram</a>
+          <a class="btn btn-warm" href="https://github.com/Malstrom">GitHub</a>
+        </div>
+      </aside>
+
+      <main class="card content-card">
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en">English</button>
+          <button class="lang-btn" data-lang="it">Italiano</button>
+          <button class="lang-btn" data-lang="ru">Русский</button>
+        </div>
+
+        <section id="en" class="lang-content active">
+          <h1 class="name">Senior engineering leader with founder-level ownership.</h1>
+          <p class="tagline">I am a backend engineer and technical leader with 8+ years of international experience across telecom, healthcare, fintech and insurtech in Russia, Italy and the USA. My profile combines deep hands-on delivery, product thinking, people coordination and CTO-level technical ownership.</p>
+          <div class="chips">
+            <span class="chip">Italy work permit</span>
+            <span class="chip">Italian native</span>
+            <span class="chip">Russian C2</span>
+            <span class="chip">English B2</span>
+          </div>
+          <div class="grid">
+            <div class="panel">
+              <h2>What I do</h2>
+              <p>I build and improve backend systems, delivery processes and engineering teams. I work well in roles where technical depth, business alignment and execution ownership all matter.</p>
+            </div>
+            <div class="panel">
+              <h2>Best fit roles</h2>
+              <p>Engineering Manager, Staff/Principal Backend Engineer, Tech Lead, CTO/VP Engineering in smaller companies, or senior consultant for backend and delivery transformations.</p>
+            </div>
+            <div class="panel">
+              <h2>Selected metrics</h2>
+              <p>80M+ telecom subscribers supported at MegaFon; ~35% deploy time reduction; 3 major healthcare systems delivered at Humanitas; $5M ICO and acquisition at Jury.online; €200k annual budget and 3,000 brokers/insurers at Insurance Arena.</p>
+            </div>
+            <div class="panel">
+              <h2>How I work</h2>
+              <p>I prefer structured processes, strong documentation and high ownership. I am comfortable both as an independent senior IC and as a technical lead coordinating teams and stakeholders.</p>
+            </div>
+          </div>
+          <section class="card timeline">
+            <h2>Experience</h2>
+            <div class="item">
+              <p class="role">Senior Backend Developer — MegaFon</p>
+              <p class="meta">Russia · 2023–2026</p>
+              <ul>
+                <li>Delivered backend work at enterprise scale in a 20-person cross-functional team.</li>
+                <li>Reduced deploy time by ~35% through CI and test optimization.</li>
+                <li>Improved reliability with Sidekiq migration, observability and infrastructure automation.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">Senior Backend Developer — GoJi Labs</p>
+              <p class="meta">USA · 2022</p>
+              <ul>
+                <li>Worked remotely on US client products in Scrum teams.</li>
+                <li>Built backend for a US real estate portal and Iowa League.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">CTO — Insurance Arena / Kompot LLC</p>
+              <p class="meta">Russia · 2013–2021</p>
+              <ul>
+                <li>Led all technical direction for a B2B insurance marketplace used by 3,000 brokers and insurers.</li>
+                <li>Owned architecture, roadmap, product execution and a budget of up to €200k/year.</li>
+                <li>Took the product to acquisition by Prima Assicurazioni.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">Tech Lead & Coordinator — Humanitas Research Hospital</p>
+              <p class="meta">Italy · 2018–2020</p>
+              <ul>
+                <li>Coordinated a 3-person team and delivered 3 production systems.</li>
+                <li>Built patient-facing platforms and integrated business workflows with SAP HCM.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">Tech Lead — Jury.online / Krypton Group</p>
+              <p class="meta">Russia · 2017–2018</p>
+              <ul>
+                <li>Led 5 developers to deliver v1.0 of a blockchain arbitration platform.</li>
+                <li>The project raised $5M in ICO funding and was later acquired.</li>
+              </ul>
+            </div>
+          </section>
+        </section>
+
+        <section id="it" class="lang-content">
+          <h1 class="name">Leader tecnico senior con ownership da founder.</h1>
+          <p class="tagline">Sono un backend engineer e technical leader con oltre 8 anni di esperienza internazionale tra telecomunicazioni, sanità, fintech e insurtech in Russia, Italia e USA. Il mio profilo unisce delivery hands-on, visione di prodotto, coordinamento di persone e responsabilità tecniche di livello CTO.</p>
+          <div class="chips">
+            <span class="chip">Permesso di lavoro Italia</span>
+            <span class="chip">Italiano madrelingua</span>
+            <span class="chip">Russo C2</span>
+            <span class="chip">Inglese B2</span>
+          </div>
+          <div class="grid">
+            <div class="panel">
+              <h2>Cosa faccio</h2>
+              <p>Progetto e miglioro sistemi backend, processi di delivery e team di ingegneria. Rendo al meglio in ruoli dove contano insieme profondità tecnica, allineamento col business e ownership dell’esecuzione.</p>
+            </div>
+            <div class="panel">
+              <h2>Ruoli ideali</h2>
+              <p>Engineering Manager, Staff/Principal Backend Engineer, Tech Lead, CTO/VP Engineering in aziende più piccole oppure consulente senior per backend e miglioramento della delivery.</p>
+            </div>
+            <div class="panel">
+              <h2>Numeri chiave</h2>
+              <p>80M+ abbonati supportati in MegaFon; ~35% di riduzione dei tempi di deploy; 3 sistemi healthcare consegnati in Humanitas; ICO da $5M e acquisizione con Jury.online; budget annuo da €200k e 3.000 broker/assicuratori in Insurance Arena.</p>
+            </div>
+            <div class="panel">
+              <h2>Come lavoro</h2>
+              <p>Preferisco processi strutturati, documentazione forte e ownership elevata. Mi trovo bene sia come senior IC indipendente sia come guida tecnica che coordina team e stakeholder.</p>
+            </div>
+          </div>
+          <section class="card timeline">
+            <h2>Esperienza</h2>
+            <div class="item">
+              <p class="role">Senior Backend Developer — MegaFon</p>
+              <p class="meta">Russia · 2023–2026</p>
+              <ul>
+                <li>Ho lavorato su backend enterprise in un team cross-funzionale di 20 persone.</li>
+                <li>Ho ridotto i tempi di deploy di ~35% tramite ottimizzazione di CI e test.</li>
+                <li>Ho migliorato affidabilità e operatività con Sidekiq, observability e automazione infrastrutturale.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">Senior Backend Developer — GoJi Labs</p>
+              <p class="meta">USA · 2022</p>
+              <ul>
+                <li>Ho lavorato in remoto su prodotti per clienti USA in team Scrum.</li>
+                <li>Ho sviluppato il backend di un portale immobiliare e di Iowa League.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">CTO — Insurance Arena / Kompot LLC</p>
+              <p class="meta">Russia · 2013–2021</p>
+              <ul>
+                <li>Ho guidato tutta la direzione tecnica di un marketplace assicurativo B2B usato da 3.000 broker e assicuratori.</li>
+                <li>Ho gestito architettura, roadmap, delivery del prodotto e un budget fino a €200k/anno.</li>
+                <li>Ho portato il prodotto fino all’acquisizione da parte di Prima Assicurazioni.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">Tech Lead & Coordinator — Humanitas Research Hospital</p>
+              <p class="meta">Italia · 2018–2020</p>
+              <ul>
+                <li>Ho coordinato un team di 3 persone e consegnato 3 sistemi in produzione.</li>
+                <li>Ho sviluppato piattaforme patient-facing e workflow integrati con SAP HCM.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">Tech Lead — Jury.online / Krypton Group</p>
+              <p class="meta">Russia · 2017–2018</p>
+              <ul>
+                <li>Ho guidato 5 sviluppatori fino alla consegna della v1.0 di una piattaforma di arbitraggio blockchain.</li>
+                <li>Il progetto ha raccolto $5M con ICO ed è stato poi acquisito.</li>
+              </ul>
+            </div>
+          </section>
+        </section>
+
+        <section id="ru" class="lang-content">
+          <h1 class="name">Сильный технический лидер с уровнем ownership как у founder-профиля.</h1>
+          <p class="tagline">Я backend-инженер и технический руководитель с 8+ годами международного опыта в телекоме, здравоохранении, финтехе и insurtech в России, Италии и США. Мой профиль сочетает hands-on delivery, продуктовое мышление, координацию людей и техническую ответственность уровня CTO.</p>
+          <div class="chips">
+            <span class="chip">ВНЖ Италии</span>
+            <span class="chip">Итальянский — родной</span>
+            <span class="chip">Русский — C2</span>
+            <span class="chip">Английский — B2</span>
+          </div>
+          <div class="grid">
+            <div class="panel">
+              <h2>Что я делаю</h2>
+              <p>Проектирую и улучшаю backend-системы, delivery-процессы и инженерные команды. Лучше всего подхожу для ролей, где важны и техническая глубина, и связь с бизнесом, и ответственность за результат.</p>
+            </div>
+            <div class="panel">
+              <h2>Лучшие роли</h2>
+              <p>Engineering Manager, Staff/Principal Backend Engineer, Tech Lead, CTO/VP Engineering в более компактных компаниях или senior consultant по backend и delivery-трансформациям.</p>
+            </div>
+            <div class="panel">
+              <h2>Ключевые цифры</h2>
+              <p>80M+ абонентов в МегаФоне; ~35% сокращение времени деплоя; 3 production-системы в Humanitas; $5M ICO и acquisition у Jury.online; бюджет €200k в год и 3 000 брокеров/страховщиков в Insurance Arena.</p>
+            </div>
+            <div class="panel">
+              <h2>Как я работаю</h2>
+              <p>Предпочитаю структурированные процессы, хорошую документацию и высокий уровень ownership. Комфортно чувствую себя и как независимый senior IC, и как технический лидер, который координирует команду и стейкхолдеров.</p>
+            </div>
+          </div>
+          <section class="card timeline">
+            <h2>Опыт</h2>
+            <div class="item">
+              <p class="role">Senior Backend Developer — МегаФон</p>
+              <p class="meta">Россия · 2023–2026</p>
+              <ul>
+                <li>Работал над backend-задачами enterprise-уровня в кросс-функциональной команде из 20 человек.</li>
+                <li>Сократил время деплоя примерно на 35% за счёт оптимизации CI и тестов.</li>
+                <li>Улучшил надёжность и операционную устойчивость через Sidekiq, observability и инфраструктурную автоматизацию.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">Senior Backend Developer — GoJi Labs</p>
+              <p class="meta">США · 2022</p>
+              <ul>
+                <li>Работал удалённо над продуктами для клиентов из США в Scrum-командах.</li>
+                <li>Разрабатывал backend для real estate портала и Iowa League.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">CTO — Insurance Arena / Kompot LLC</p>
+              <p class="meta">Россия · 2013–2021</p>
+              <ul>
+                <li>Руководил всей технической частью B2B-страхового маркетплейса, которым пользовались 3 000 брокеров и страховщиков.</li>
+                <li>Отвечал за архитектуру, roadmap, execution продукта и бюджет до €200k в год.</li>
+                <li>Довёл продукт до acquisition со стороны Prima Assicurazioni.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">Tech Lead & Coordinator — Humanitas Research Hospital</p>
+              <p class="meta">Италия · 2018–2020</p>
+              <ul>
+                <li>Координировал команду из 3 человек и вывел в продакшн 3 системы.</li>
+                <li>Разрабатывал patient-facing платформы и workflow с интеграцией SAP HCM.</li>
+              </ul>
+            </div>
+            <div class="item">
+              <p class="role">Tech Lead — Jury.online / Krypton Group</p>
+              <p class="meta">Россия · 2017–2018</p>
+              <ul>
+                <li>Руководил 5 разработчиками при запуске v1.0 blockchain arbitration platform.</li>
+                <li>Проект привлёк $5M через ICO и позже был приобретён.</li>
+              </ul>
+            </div>
+          </section>
+        </section>
+
+        <p class="foot">Private shareable profile page. Publicly accessible only if you know the direct URL.</p>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.lang-btn');
+    const sections = document.querySelectorAll('.lang-content');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        buttons.forEach(b => b.classList.remove('active'));
+        sections.forEach(s => s.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(lang).classList.add('active');
+        document.documentElement.lang = lang;
+      });
+    });
+  </script>
+</body>
+</html>
